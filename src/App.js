@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useEffect, useState } from 'react';
+import { supabase } from './supabaseClient';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Signup from './components/Signup.js';
+import Login from './components/Login';
+import CaseStudyGenerator from './components/CaseStudyGenerator';
+import PreviousExercises from './components/PreviousExercises';
 
 function App() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {session ? (
+        <>
+          <nav>
+            <Link to="/">Practice</Link> | <Link to="/previous">Previous Exercises</Link> |{' '}
+            <button onClick={() => supabase.auth.signOut()}>Log Out</button>
+          </nav>
+          <Routes>
+            <Route path="/" element={<CaseStudyGenerator />} />
+            <Route path="/previous" element={<PreviousExercises />} />
+          </Routes>
+        </>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      )}
+    </Router>
   );
 }
 
