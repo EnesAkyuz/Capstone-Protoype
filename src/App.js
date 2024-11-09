@@ -6,6 +6,7 @@ import Signup from './components/Signup.js';
 import Login from './components/Login';
 import CaseStudyGenerator from './components/CaseStudyGenerator';
 import PreviousExercises from './components/PreviousExercises';
+import { AnimatedBackground } from 'animated-backgrounds';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <Router>
+      <AnimatedBackground animationName="auroraBorealis" />
       {session ? (
         <>
           <nav>
