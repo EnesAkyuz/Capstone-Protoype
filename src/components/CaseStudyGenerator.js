@@ -2,9 +2,14 @@
 import React, { useState } from 'react';
 import { generateFinanceCaseStudy, evaluateFinanceCaseStudy } from '../openaiClient';
 import { supabase } from '../supabaseClient';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function CaseStudyGenerator() {
   const [difficulty, setDifficulty] = useState('Intermediate');
+  const [education, setEducation] = useState('Bachelors');
+  const [jobDescription, setJobDescription] = useState('');
+  const [topic, setTopic] = useState('');
   const [caseStudy, setCaseStudy] = useState('');
   const [userSolution, setUserSolution] = useState('');
   const [evaluation, setEvaluation] = useState('');
@@ -81,7 +86,17 @@ function CaseStudyGenerator() {
   return (
     <div className="container">
       <h2>Finance & Quant Interview Practice</h2>
-      <div>
+      <div className="form-group">
+        <label>
+          Education Level:
+          <select value={education} onChange={(e) => setEducation(e.target.value)}>
+            <option value="Bachelors">Bachelor's Degree</option>
+            <option value="Masters">Master's Degree</option>
+            <option value="PhD">PhD</option>
+            <option value="MBA">MBA</option>
+          </select>
+        </label>
+        
         <label>
           Difficulty Level:
           <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
@@ -89,32 +104,55 @@ function CaseStudyGenerator() {
             <option value="Intermediate">Intermediate</option>
             <option value="Hard">Hard</option>
           </select>
-        </label><br/>
+        </label>
+
+        <label>
+          Job Description:
+          <textarea
+            placeholder="Paste the job description you're applying for..."
+            value={jobDescription}
+            onChange={(e) => setJobDescription(e.target.value)}
+            rows="3"
+          ></textarea>
+        </label>
+
+        <label>
+          Specific Topic (optional):
+          <input
+            type="text"
+            placeholder="e.g., Options Pricing, Risk Management, etc."
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+          />
+        </label>
+        
         <button onClick={handleGenerate} disabled={loading}>
           {loading ? 'Generating...' : 'Generate Case Study'}
         </button>
       </div>
       {caseStudy && (
-        <div>
-          <h3>Case Study:</h3>
-          <p>{caseStudy}</p>
+        <div className="content-section">
+          <div className="case-study-markdown">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{caseStudy}</ReactMarkdown>
+          </div>
           <textarea
             placeholder="Enter your solution here..."
             value={userSolution}
             onChange={(e) => setUserSolution(e.target.value)}
             rows="10"
             cols="50"
-          ></textarea><br/>
+          ></textarea>
           <button onClick={handleEvaluate} disabled={loading || evaluation}>
             {loading ? 'Evaluating...' : evaluation ? 'Evaluation Complete' : 'Submit Solution for Evaluation'}
           </button>
         </div>
       )}
       {evaluation && (
-        <div>
-          <h3>Evaluation:</h3>
-          <p>{evaluation}</p>
-          <p>Your solution and evaluation have been saved.</p>
+        <div className="content-section">
+          <div className="evaluation-content">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{evaluation}</ReactMarkdown>
+          </div>
+          <p className="success-message">Your solution and evaluation have been saved.</p>
         </div>
       )}
       <div>

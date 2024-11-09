@@ -1,40 +1,318 @@
-/* src/index.css */
+/* Modern CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+}
+
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-input, select, textarea, button {
-  margin: 10px 0;
-  padding: 8px;
-  width: 100%;
-}
-
-button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-}
-
-button:disabled {
-  background-color: #6c757d;
-}
-
-.exercise {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
+/* Navigation Styling */
 nav {
-  margin-bottom: 20px;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav a {
-  margin-right: 10px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
-h2, h3 {
-  margin-top: 20px;
+nav a:hover {
+  background-color: #f0f7ff;
+}
+
+/* Form Elements */
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+button {
+  background: rgba(37, 99, 235, 0.9);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  min-width: 150px;
+}
+
+button:hover:not(:disabled) {
+  background: rgba(29, 78, 216, 0.95);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Typography */
+h2 {
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  font-size: 1.875rem;
+}
+
+h3 {
+  color: #334155;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.5rem;
+}
+
+/* Case Study Section */
+.exercise {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.exercise:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.exercise p {
+  margin-bottom: 1rem;
+}
+
+.exercise strong {
+  color: #475569;
+}
+
+/* Evaluation Section */
+.evaluation {
+  background: #f8fafc;
+  border-left: 4px solid #2563eb;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Links */
+a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  button {
+    width: 100%;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.exercise-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.exercise-header {
+  padding: 1rem;
+  background: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exercise-header:hover {
+  background: #f1f5f9;
+}
+
+.exercise-content {
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.expand-icon {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+.case-study-content,
+.solution-content,
+.evaluation-content {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 0.5rem 0 1rem;
+}
+
+.case-study-markdown {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.case-study-markdown h1 {
+  color: #1e293b;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.case-study-markdown h2 {
+  color: #334155;
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.case-study-markdown p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.case-study-markdown ul, 
+.case-study-markdown ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.case-study-markdown li {
+  margin-bottom: 0.5rem;
+}
+
+.case-study-markdown table,
+.evaluation-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: white;
+  table-layout: fixed;
+}
+
+.case-study-markdown th,
+.case-study-markdown td,
+.evaluation-content th,
+.evaluation-content td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.case-study-markdown th,
+.evaluation-content th {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+.case-study-markdown tr:nth-child(even),
+.evaluation-content tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.content-section {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.content-section:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.case-study-markdown,
+.evaluation-content {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+textarea {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.success-message {
+  color: #059669;
+  font-weight: 500;
+  padding: 0.75rem;
+  background: rgba(167, 243, 208, 0.2);
+  border-radius: 6px;
+  backdrop-filter: blur(5px);
 }
