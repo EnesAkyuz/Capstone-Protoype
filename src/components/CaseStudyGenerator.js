@@ -4,6 +4,7 @@ import { generateFinanceCaseStudy, evaluateFinanceCaseStudy } from '../openaiCli
 import { supabase } from '../supabaseClient';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Link } from 'react-router-dom';
 
 function CaseStudyGenerator() {
   const [difficulty, setDifficulty] = useState('Intermediate');
@@ -156,7 +157,7 @@ function CaseStudyGenerator() {
         </div>
       )}
       <div>
-        <a href="/previous">View Previous Exercises</a>
+        <Link to="/previous">View Previous Exercises</Link>
       </div>
     </div>
   );

@@ -34,7 +34,10 @@ function App() {
         <>
           <nav>
             <Link to="/">Practice</Link> | <Link to="/previous">Previous Exercises</Link> |{' '}
-            <button onClick={() => supabase.auth.signOut()}>Log Out</button>
+            <button onClick={async () => {
+              await supabase.auth.signOut();
+              window.location.href = '/';
+            }}>Log Out</button>
           </nav>
           <Routes>
             <Route path="/" element={<CaseStudyGenerator />} />

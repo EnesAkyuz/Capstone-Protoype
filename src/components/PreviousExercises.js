@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Link } from 'react-router-dom';
 
 function PreviousExercises() {
   const [exercises, setExercises] = useState([]);
@@ -68,7 +69,7 @@ function PreviousExercises() {
         <p>No exercises found.</p>
       )}
       <div>
-        <a href="/">Back to Practice</a>
+        <Link to="/">Back to Practice</Link>
       </div>
     </div>
   );
